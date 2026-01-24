@@ -1,0 +1,167 @@
+{
+  "users": [
+    {
+      "id": "1769226141561",
+      "email": "test1769226141380@example.com",
+      "password": "$2b$10$hzjbsR9cP9z.WqpPorIYs.BdzTYYZ27dhST4wegRQWVMCOmssRjqm",
+      "name": "Test User",
+      "scores": [
+        {
+          "score": 60,
+          "breakdown": "{\"passwords\":10,\"phishing\":20,\"devices\":30}",
+          "createdAt": "2026-01-24T03:42:21.561Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Enable 2FA on Email",
+          "category": "Account Security",
+          "completed": false
+        },
+        {
+          "id": "2",
+          "title": "Update PC Operating System",
+          "category": "Device Security",
+          "completed": false
+        },
+        {
+          "id": "3",
+          "title": "Run a Virus Scan",
+          "category": "Malware Prevention",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "1769226201084",
+      "email": "test1769226200897@example.com",
+      "password": "$2b$10$DeqVNIulFVAoX4JEosy4Qea1riIyv4qoJBaKcjPr1CQTlPdVp3W7C",
+      "name": "Test User",
+      "scores": [
+        {
+          "score": 60,
+          "breakdown": "{\"passwords\":10,\"phishing\":20,\"devices\":30}",
+          "createdAt": "2026-01-24T03:43:21.084Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Enable 2FA on Email",
+          "category": "Account Security",
+          "completed": false
+        },
+        {
+          "id": "2",
+          "title": "Update PC Operating System",
+          "category": "Device Security",
+          "completed": false
+        },
+        {
+          "id": "3",
+          "title": "Run a Virus Scan",
+          "category": "Malware Prevention",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "1769226752829",
+      "email": "tejaskute284@gmail.com",
+      "password": "$2b$10$d0rPADbRc1MgYfl/Z1vxYeYvtpqdjCm4NuLl9oEmhl535a7CtWfhe",
+      "name": "tejas ",
+      "scores": [
+        {
+          "score": 60,
+          "breakdown": "{\"passwords\":10,\"phishing\":20,\"devices\":30}",
+          "createdAt": "2026-01-24T03:52:32.829Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Enable 2FA on Email",
+          "category": "Account Security",
+          "completed": true
+        },
+        {
+          "id": "2",
+          "title": "Update PC Operating System",
+          "category": "Device Security",
+          "completed": true
+        },
+        {
+          "id": "3",
+          "title": "Run a Virus Scan",
+          "category": "Malware Prevention",
+          "completed": true
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "1",
+      "title": "Phishing 101: How to Spot a Fake",
+      "type": "Article",
+      "duration": "5 min read",
+      "level": "Beginner",
+      "category": "Phishing",
+      "url": "https://en.wikipedia.org/wiki/Phishing"
+    },
+    {
+      "id": "2",
+      "title": "Setting up a Password Manager",
+      "type": "Video",
+      "duration": "10 min watch",
+      "level": "Intermediate",
+      "category": "Passwords",
+      "url": "https://www.youtube.com/results?search_query=password+manager+setup"
+    },
+    {
+      "id": "3",
+      "title": "Network Security Basics",
+      "type": "Course",
+      "duration": "1 hour",
+      "level": "Advanced",
+      "category": "Network",
+      "url": "https://www.coursera.org/search?query=network%20security"
+    },
+    {
+      "id": "4",
+      "title": "Social Engineering Attacks",
+      "type": "Article",
+      "duration": "7 min read",
+      "level": "Beginner",
+      "category": "Social Engineering",
+      "url": "https://en.wikipedia.org/wiki/Social_engineering_(security)"
+    }
+  ],
+  "tips": [
+    {
+      "id": 1,
+      "title": "Use Passphrases",
+      "content": "Longer is stronger.",
+      "category": "Passwords"
+    },
+    {
+      "id": 2,
+      "title": "Enable 2FA",
+      "content": "Two layers are better than one.",
+      "category": "Security"
+    }
+  ],
+  "leaderboard": [
+    {
+      "rank": 1,
+      "name": "CyberNinja",
+      "score": 950
+    },
+    {
+      "rank": 2,
+      "name": "SecureSam",
+      "score": 890
+    }
+  ]
+}

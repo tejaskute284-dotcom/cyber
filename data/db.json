@@ -1,0 +1,71 @@
+{
+  "users": [],
+  "resources": [
+    {
+      "id": "1",
+      "title": "Phishing 101: How to Spot a Fake",
+      "type": "Article",
+      "content": "Phishing is a type of social engineering...",
+      "duration": "5 min read",
+      "level": "Beginner",
+      "category": "Phishing",
+      "url": "https://en.wikipedia.org/wiki/Phishing"
+    },
+    {
+      "id": "2",
+      "title": "Setting up a Password Manager",
+      "type": "Video",
+      "content": "Learn how to use LastPass or 1Password...",
+      "duration": "10 min watch",
+      "level": "Intermediate",
+      "category": "Passwords",
+      "url": "https://www.youtube.com/results?search_query=password+manager+setup"
+    },
+    {
+      "id": "3",
+      "title": "Network Security Basics",
+      "type": "Course",
+      "content": "Understanding firewalls...",
+      "duration": "1 hour",
+      "level": "Advanced",
+      "category": "Network",
+      "url": "https://www.coursera.org/search?query=network%20security"
+    },
+    {
+      "id": "4",
+      "title": "Social Engineering Attacks",
+      "type": "Article",
+      "content": "Manipulating people...",
+      "duration": "7 min read",
+      "level": "Beginner",
+      "category": "Social Engineering",
+      "url": "https://en.wikipedia.org/wiki/Social_engineering_(security)"
+    }
+  ],
+  "tips": [
+    {
+      "id": 1,
+      "title": "Use Passphrases",
+      "content": "Longer is stronger.",
+      "category": "Passwords"
+    },
+    {
+      "id": 2,
+      "title": "Enable 2FA",
+      "content": "Two layers are better than one.",
+      "category": "Security"
+    }
+  ],
+  "leaderboard": [
+    {
+      "rank": 1,
+      "name": "CyberNinja",
+      "score": 950
+    },
+    {
+      "rank": 2,
+      "name": "SecureSam",
+      "score": 890
+    }
+  ]
+}
