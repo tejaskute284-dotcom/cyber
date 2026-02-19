@@ -4,14 +4,30 @@ import jwt from 'jsonwebtoken';
 import { readDb, writeDb } from '../lib/db';
 
 const router = express.Router();
-const JWT_SECRET = 'supersecretkey';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+    console.warn('⚠️ WARNING: JWT_SECRET not set in environment. Authentication will fail.');
+}
 
 // Register
 router.post('/register', async (req, res) => {
     try {
         const { email, password, name } = req.body;
-        const db = readDb();
 
+        // --- STRICT INPUT VALIDATION & SANITIZATION ---
+        if (!email || typeof email !== 'string' || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) || email.length > 254) {
+            return res.status(400).json({ error: "Invalid email format (max 254 chars)" });
+        }
+        if (!password || typeof password !== 'string' || password.length < 8 || password.length > 128) {
+            return res.status(400).json({ error: "Password must be 8-128 characters" });
+        }
+        if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 100) {
+            return res.status(400).json({ error: "Name is required (max 100 chars)" });
+        }
+        // ---------------------------------------------
+
+        const db = readDb();
         const existingUser = db.users.find((u: any) => u.email === email);
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
@@ -20,9 +36,9 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = {
             id: Date.now().toString(),
-            email,
+            email: email.toLowerCase().trim(),
             password: hashedPassword,
-            name,
+            name: name.trim(),
             scores: [
                 {
                     score: 60,
@@ -40,10 +56,12 @@ router.post('/register', async (req, res) => {
         db.users.push(user);
         writeDb(db);
 
+        if (!JWT_SECRET) return res.status(500).json({ error: "Server authentication error" });
+
         const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
-        console.error(error);
+        console.error("[Auth Register] Error:", error);
         res.status(500).json({ error: 'Error creating user' });
     }
 });
@@ -52,18 +70,27 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // --- STRICT INPUT VALIDATION ---
+        if (!email || typeof email !== 'string' || !password || typeof password !== 'string') {
+            return res.status(400).json({ error: "Email and password are required" });
+        }
+        // -------------------------------
+
         const db = readDb();
+        const user = db.users.find((u: any) => u.email === email.toLowerCase().trim());
 
-        const user = db.users.find((u: any) => u.email === email);
-
-        if (!user) return res.status(400).json({ error: 'User not found' });
+        if (!user) return res.status(400).json({ error: 'Invalid credentials' });
 
         const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword) return res.status(400).json({ error: 'Invalid password' });
+        if (!validPassword) return res.status(400).json({ error: 'Invalid credentials' });
+
+        if (!JWT_SECRET) return res.status(500).json({ error: "Server authentication error" });
 
         const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
+        console.error("[Auth Login] Error:", error);
         res.status(500).json({ error: 'Error logging in' });
     }
 });

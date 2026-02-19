@@ -23,7 +23,14 @@ router.post('/', authenticateToken, async (req, res) => {
     try {
         const { message, history } = req.body;
 
-        if (!message) return res.status(400).json({ error: "Message required" });
+        // --- STRICT INPUT VALIDATION ---
+        if (!message || typeof message !== 'string' || message.length > 2000) {
+            return res.status(400).json({ error: "Message is required (max 2000 chars)" });
+        }
+        if (history && (!Array.isArray(history) || history.length > 50)) {
+            return res.status(400).json({ error: "Invalid history format or length (max 50)" });
+        }
+        // -------------------------------
 
         const chat = model.startChat({
             history: [

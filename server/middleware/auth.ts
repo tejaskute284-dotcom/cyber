@@ -14,12 +14,14 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
     }
 
     try {
-        const verified = jwt.verify(token, 'supersecretkey');
+        const JWT_SECRET = process.env.JWT_SECRET;
+        if (!JWT_SECRET) {
+            return res.status(500).json({ error: 'Server authentication misconfigured' });
+        }
+        const verified = jwt.verify(token, JWT_SECRET);
         req.user = verified;
         next();
     } catch (error) {
-        console.log("Auth Error:", error);
-        console.log("Token:", token);
         res.status(403).json({ error: 'Invalid token' });
     }
 };

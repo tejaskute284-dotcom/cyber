@@ -34,14 +34,24 @@ router.get('/settings', authenticateToken, (req: AuthRequest, res) => {
 router.put('/settings', authenticateToken, (req: AuthRequest, res) => {
     try {
         const { name, email } = req.body;
+
+        // --- STRICT INPUT VALIDATION ---
+        if (name && (typeof name !== 'string' || name.trim().length === 0 || name.length > 100)) {
+            return res.status(400).json({ error: "Invalid name format (max 100 chars)" });
+        }
+        if (email && (typeof email !== 'string' || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) || email.length > 254)) {
+            return res.status(400).json({ error: "Invalid email format" });
+        }
+        // -------------------------------
+
         const db = readDb();
         const user = db.users.find((u: any) => u.id === req.user.id);
 
         if (!user) return res.status(404).json({ error: "User not found" });
 
         // Update fields
-        if (name) user.name = name;
-        if (email) user.email = email;
+        if (name) user.name = name.trim();
+        if (email) user.email = email.toLowerCase().trim();
 
         writeDb(db);
         res.json({ message: "Profile updated successfully", user: { name: user.name, email: user.email } });
