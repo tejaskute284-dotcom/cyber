@@ -98,6 +98,39 @@
           "completed": true
         }
       ]
+    },
+    {
+      "id": "1740226520000",
+      "email": "temp@caresync.com",
+      "password": "$2b$12$4e2TfJBqXkn1/CmBC0jNFujf2ZxGlS8GdscUDjKzZ1D2AROzZaH2G",
+      "name": "Temporary User",
+      "scores": [
+        {
+          "score": 60,
+          "breakdown": "{\"passwords\":10,\"phishing\":20,\"devices\":30}",
+          "createdAt": "2026-02-22T12:35:00.000Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Enable 2FA on Email",
+          "category": "Account Security",
+          "completed": true
+        },
+        {
+          "id": "2",
+          "title": "Update PC Operating System",
+          "category": "Device Security",
+          "completed": true
+        },
+        {
+          "id": "3",
+          "title": "Run a Virus Scan",
+          "category": "Malware Prevention",
+          "completed": true
+        }
+      ]
     }
   ],
   "resources": [

@@ -1,13 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
-import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 import dashboardRoutes from './routes/dashboard';
 import chatRoutes from './routes/chat';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,12 +35,21 @@ app.use(express.json({ limit: '10kb' }));
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
+    max: 100,
     message: { error: 'Too many requests, please try again later.' },
     standardHeaders: true,
     legacyHeaders: false,
 });
 app.use('/api/', limiter);
+
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    message: { error: 'Too many auth attempts, please try again later.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use('/api/auth/', authLimiter);
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -49,6 +58,11 @@ app.use('/api/chat', chatRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Cyber Hygiene Coach API is running', version: '1.0.0' });
+});
+
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found' });
 });
 
 // Global Error Handler

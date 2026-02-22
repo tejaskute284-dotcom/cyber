@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Security
+.env*
+logs/
+security-reports/
+*.pem
+*.key
+*.p12
+secrets/
